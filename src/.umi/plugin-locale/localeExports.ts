@@ -3,15 +3,38 @@ import {
   createIntl,
   IntlShape,
   MessageDescriptor,
-} from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_react-intl@3.12.0@react-intl';
+} from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_react-intl@3.12.0@react-intl';
 import { ApplyPluginsType } from 'umi';
 import { event, LANG_CHANGE_EVENT } from './locale';
 // @ts-ignore
-import warning from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_warning@4.0.3@warning/warning.js';
+import warning from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_warning@4.0.3@warning/warning.js';
 
 import { plugin } from '../core/umiExports';
 
-export * from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_react-intl@3.12.0@react-intl';
+export {
+  createIntl,
+};
+export {
+  FormattedDate,
+  FormattedDateParts,
+  FormattedDisplayName,
+  FormattedHTMLMessage,
+  FormattedList,
+  FormattedMessage,
+  FormattedNumber,
+  FormattedNumberParts,
+  FormattedPlural,
+  FormattedRelativeTime,
+  FormattedTime,
+  FormattedTimeParts,
+  IntlContext,
+  IntlProvider,
+  RawIntlProvider,
+  createIntlCache,
+  defineMessages,
+  injectIntl,
+  useIntl,
+} from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_react-intl@3.12.0@react-intl';
 
 let g_intl: IntlShape;
 
@@ -20,7 +43,7 @@ const useLocalStorage = true;
 export const localeInfo: {[key: string]: any} = {
   'en-US': {
     messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/locales/en-US.ts')),
+      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/OpenSource/react-adminTs/src/locales/en-US.ts')),
     },
     locale: 'en-US',
     antd: {
@@ -30,7 +53,7 @@ export const localeInfo: {[key: string]: any} = {
   },
   'pt-BR': {
     messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/locales/pt-BR.ts')),
+      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/OpenSource/react-adminTs/src/locales/pt-BR.ts')),
     },
     locale: 'pt-BR',
     antd: {
@@ -40,7 +63,7 @@ export const localeInfo: {[key: string]: any} = {
   },
   'zh-CN': {
     messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/locales/zh-CN.ts')),
+      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/OpenSource/react-adminTs/src/locales/zh-CN.ts')),
     },
     locale: 'zh-CN',
     antd: {
@@ -50,7 +73,7 @@ export const localeInfo: {[key: string]: any} = {
   },
   'zh-TW': {
     messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/locales/zh-TW.ts')),
+      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/tiw/Documents/OpenSource/react-adminTs/src/locales/zh-TW.ts')),
     },
     locale: 'zh-TW',
     antd: {

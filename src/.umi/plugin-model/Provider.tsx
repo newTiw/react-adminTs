@@ -1,13 +1,13 @@
 // @ts-nocheck
 import React from 'react';
-import initialState from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/.umi/plugin-initial-state/models/initialState';
+import initialState from '/Users/tiw/Documents/OpenSource/react-adminTs/src/.umi/plugin-initial-state/models/initialState';
 
 // @ts-ignore
-import Dispatcher from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_plugin-model@2.5.1@@umijs/plugin-model/lib/helpers/dispatcher';
+import Dispatcher from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@umijs_plugin-model@2.5.3@@umijs/plugin-model/lib/helpers/dispatcher';
 // @ts-ignore
-import Executor from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_plugin-model@2.5.1@@umijs/plugin-model/lib/helpers/executor';
+import Executor from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@umijs_plugin-model@2.5.3@@umijs/plugin-model/lib/helpers/executor';
 // @ts-ignore
-import { UmiContext } from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_plugin-model@2.5.1@@umijs/plugin-model/lib/helpers/constant';
+import { UmiContext } from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@umijs_plugin-model@2.5.3@@umijs/plugin-model/lib/helpers/constant';
 
 export const models = { '@@initialState': initialState,  };
 

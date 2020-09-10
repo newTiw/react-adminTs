@@ -13,8 +13,19 @@ interface LoginProps {
   onSubmit:any;
 }
 const LoginForm: React.FC<LoginProps> = (props:any) => {
+  const [ options, setOptions ] = useState({
+    stauts: true,
+    text: "登录"
+  })
+  // 登录触发
   const onFinish = (value:any) => {
-    props.onSubmit && props.onSubmit(value)
+    setOptions({
+      stauts: false,
+      text: '正在登录'
+    })
+    setTimeout(() => {
+      props.onSubmit && props.onSubmit(value)
+    }, 3000)
   }
   const [ codeValue, setCodeValue ] = useState<string | null>(null)
   useEffect(() => {
@@ -64,9 +75,12 @@ const LoginForm: React.FC<LoginProps> = (props:any) => {
         </TabPane>
       </Tabs>
       <Form.Item>
-        <Button  type="primary" htmlType="submit" className={`login-form-button ${styles.submit_btn}`}>
-          登录
-        </Button>
+        <Button 
+          type="primary" 
+          htmlType="submit" 
+          loading={!options.stauts}
+          className={`login-form-button ${styles.submit_btn}`}
+        >{options.text}</Button>
       </Form.Item>
     </Form>
   )

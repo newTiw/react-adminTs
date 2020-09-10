@@ -1,7 +1,7 @@
 /*
  * @Author: tiw
  * @Date: 2020-07-25 23:49:41
- * @LastEditTime: 2020-07-26 01:01:22
+ * @LastEditTime: 2020-09-03 10:16:58
  * @LastEditors: Please set LastEditors
  * @Description: 布局配置
  */ 
@@ -14,11 +14,11 @@ type DefaultSettings = ProSettings & {
 };
 
 const proSettings: DefaultSettings = {
-  // realDark
-  navTheme: 'realDark',
+  // realDark | dark
+  navTheme: 'dark',
   // 拂晓蓝
   primaryColor: '#1890ff',
-  layout: 'mix',
+  layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,

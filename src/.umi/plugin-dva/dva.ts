@@ -3,8 +3,12 @@ import { Component } from 'react';
 import { ApplyPluginsType } from 'umi';
 import dva from 'dva';
 // @ts-ignore
-import createLoading from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_dva-loading@3.0.20@dva-loading/dist/index.esm.js';
+import createLoading from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_dva-loading@3.0.20@dva-loading/dist/index.esm.js';
 import { plugin, history } from '../core/umiExports';
+import ModelGlobal0 from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/global.ts';
+import ModelLogin1 from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/login.ts';
+import ModelSetting2 from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/setting.ts';
+import ModelUser3 from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/user.ts';
 
 let app:any = null;
 
@@ -28,10 +32,10 @@ export function _onCreate(options = {}) {
   (runtimeDva.plugins || []).forEach((plugin:any) => {
     app.use(plugin);
   });
-  app.model({ namespace: 'global', ...(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/global.ts').default) });
-app.model({ namespace: 'login', ...(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/login.ts').default) });
-app.model({ namespace: 'setting', ...(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/setting.ts').default) });
-app.model({ namespace: 'user', ...(require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/user.ts').default) });
+  app.model({ namespace: 'global', ...ModelGlobal0 });
+app.model({ namespace: 'login', ...ModelLogin1 });
+app.model({ namespace: 'setting', ...ModelSetting2 });
+app.model({ namespace: 'user', ...ModelUser3 });
   return app;
 }
 

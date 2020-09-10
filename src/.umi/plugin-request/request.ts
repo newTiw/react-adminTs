@@ -1,6 +1,6 @@
 // @ts-nocheck
 /**
- * Base on https://github.com/umijs//Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_umi-request@1.3.5@umi-request
+ * Base on https://github.com/umijs//Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_umi-request@1.3.5@umi-request
  */
 import {
   extend,
@@ -13,14 +13,14 @@ import {
   RequestResponse,
   RequestInterceptor,
   ResponseInterceptor,
-} from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_umi-request@1.3.5@umi-request';
+} from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_umi-request@1.3.5@umi-request';
 // @ts-ignore
 
 import { ApplyPluginsType } from 'umi';
 import { history, plugin } from '../core/umiExports';
             
 import { message, notification } from 'antd';
-import useUmiRequest, { UseRequestProvider } from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@ahooksjs_use-request@2.2.0@@ahooksjs/use-request';
+import useUmiRequest, { UseRequestProvider } from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@ahooksjs_use-request@2.5.0@@ahooksjs/use-request';
 import {
   BaseOptions,
   BasePaginatedOptions,
@@ -36,9 +36,9 @@ import {
   PaginatedOptionsWithFormat,
   PaginatedParams,
   PaginatedResult,
-} from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@ahooksjs_use-request@2.2.0@@ahooksjs/use-request/lib/types';
+} from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@ahooksjs_use-request@2.5.0@@ahooksjs/use-request/lib/types';
 
-type ResultWithData<T = any> = { data: T; [key: string]: any };
+type ResultWithData<T = any> = { data?: T; [key: string]: any };
 
 function useRequest<
   R = any,
@@ -58,7 +58,7 @@ function useRequest<R extends LoadMoreFormatReturn = any, RR = any>(
   options: LoadMoreOptionsWithFormat<R, RR>,
 ): LoadMoreResult<R>;
 function useRequest<
-  R extends ResultWithData<LoadMoreFormatReturn> = any,
+  R extends ResultWithData<LoadMoreFormatReturn | any> = any,
   RR extends R = any
 >(
   service: CombineService<R, LoadMoreParams<R['data']>>,

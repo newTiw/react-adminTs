@@ -1,11 +1,23 @@
 @import '~antd/es/style/themes/default.less';
 
+* {
+  box-sizing: border-box;
+}
 html,
 body,
 #root {
   height: 100%;
 }
 
+.block {
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+}
+// 整体外边距
+.ant-pro-basicLayout-content {
+  margin: 15px;
+}
 .colorWeak {
   filter: invert(80%);
 }
@@ -52,3 +64,4 @@ ol {
     min-height: 100vh;
   }
 }
+

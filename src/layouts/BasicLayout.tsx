@@ -1,10 +1,11 @@
 /*
  * @Author: tiw
  * @Date: 2020-07-25 23:49:41
- * @LastEditTime: 2020-07-27 14:56:56
+ * @LastEditTime: 2020-09-07 17:24:48
  * @LastEditors: Please set LastEditors
  * @Description: footer 布局
- */ 
+ */
+
 /**
  * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
  * You can view component api by:
@@ -13,17 +14,17 @@
 import ProLayout, {
   MenuDataItem,
   BasicLayoutProps as ProLayoutProps,
-  Settings,
-  // DefaultFooter,
+  Settings, // DefaultFooter,
 } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useIntl, connect, Dispatch, history } from 'umi';
 import { Result, Button } from 'antd';
+import { SmileOutlined, BorderOuterOutlined } from '@ant-design/icons';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { getAuthorityFromRouter } from '@/utils/utils';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.svg'; // import { addLocaleData } from 'react-intl'; /* react-intl imports */
 
 const noMatch = (
   <Result
@@ -56,19 +57,21 @@ export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
  * use Authorized check all menu item
  */
 
+const iconEnum = {
+  smile: <SmileOutlined />,
+  table: <BorderOuterOutlined />,
+};
+
 const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
-  console.log(menuList)
   return menuList.map((item) => {
     const localItem = {
       ...item,
       children: item.children ? menuDataRender(item.children) : undefined,
+      icon: iconEnum[item.icon],
     };
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
-}
-  
-
-// const defaultFooterDom = (
+}; // const defaultFooterDom = (
 //   <DefaultFooter
 //     copyright={`一号管家为您服务`}
 //     links={[
@@ -90,11 +93,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     location = {
       pathname: '/',
     },
-  } = props;
-  /**
-   * constructor
-   */
+    menuData,
+  } = props; // 菜单栏
 
+  const [menusData, setMenusData] = useState<any>([]);
   useEffect(() => {
     if (dispatch) {
       dispatch({
@@ -102,6 +104,14 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       });
     }
   }, []);
+  useEffect(() => {
+    // if (Array.isArray(menuData)){
+    //   menuData.map((v) => {
+    //     const localV = { ...v, children: v.children ? menuDataRender(v.children) : [] , icon:iconEnum[v.icon]};
+    //   })
+    // }
+    setMenusData(menuData);
+  }, [menuData]);
   /**
    * init variables
    */
@@ -118,24 +128,23 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   const authorized = getAuthorityFromRouter(props.route.routes, location.pathname || '/') || {
     authority: undefined,
   };
-  const { formatMessage } = useIntl();
-
+  const {} = useIntl();
   return (
     <ProLayout
       logo={logo}
-      formatMessage={formatMessage}
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl || !menuItemProps.path) {
           return defaultDom;
         }
+
         return <Link to={menuItemProps.path}>{defaultDom}</Link>;
       }}
       breadcrumbRender={(routers = []) => [
         {
           path: '/',
-          breadcrumbName: formatMessage({ id: 'menu.home' }),
+          breadcrumbName: '首页',
         },
         ...routers,
       ]}
@@ -146,9 +155,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         ) : (
           <span>{route.breadcrumbName}</span>
         );
-      }}
-      // footerRender={() => defaultFooterDom}
-      menuDataRender={menuDataRender}
+      }} // footerRender={() => defaultFooterDom}
+      menuDataRender={() => menuDataRender(menusData)}
       rightContentRender={() => <RightContent />}
       {...props}
       {...settings}
@@ -160,7 +168,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   );
 };
 
-export default connect(({ global, settings }: ConnectState) => ({
+export default connect(({ global, settings, user }: ConnectState) => ({
   collapsed: global.collapsed,
   settings,
+  menuData: user.menuData,
 }))(BasicLayout);

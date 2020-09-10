@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { createBrowserHistory } from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_runtime@3.2.10@@umijs/runtime';
+import { createBrowserHistory } from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@umijs_runtime@3.2.19@@umijs/runtime';
 
 let options = {
   "basename": "/"

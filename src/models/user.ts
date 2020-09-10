@@ -1,12 +1,12 @@
 /*
  * @Author: tiw
  * @Date: 2020-07-25 23:49:41
- * @LastEditTime: 2020-07-27 14:53:32
+ * @LastEditTime: 2020-09-07 13:34:24
  * @LastEditors: Please set LastEditors
  * @Description: 
  */ 
 import { Effect, Reducer } from 'umi';
-
+import { HomeOutlined } from '@ant-design/icons'
 import { queryCurrent } from '@/services/user';
 
 export interface CurrentUser {
@@ -25,6 +25,7 @@ export interface CurrentUser {
 
 export interface UserModelState {
   currentUser?: CurrentUser;
+  menuData?: [any];
 }
 
 export interface UserModelType {
@@ -40,9 +41,15 @@ export interface UserModelType {
 
 const UserModel: UserModelType = {
   namespace: 'user',
-
   state: {
     currentUser: {},
+    menuData: [
+      {
+        "path": "/table",
+        "name": "表格",
+        "icon": 'table'
+      }
+    ]
   },
 
   effects: {

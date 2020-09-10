@@ -1,63 +1,35 @@
 // @ts-nocheck
 import './core/polyfill';
-import '@@/core/devScripts';
 import '../global.tsx';
 import { plugin } from './core/plugin';
+import './core/pluginRegister';
 import { createHistory } from './core/history';
-import { ApplyPluginsType } from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_runtime@3.2.10@@umijs/runtime';
-import { renderClient } from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_renderer-react@3.2.10@@umijs/renderer-react/dist/index.js';
+import { ApplyPluginsType } from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@umijs_runtime@3.2.19@@umijs/runtime';
+import { renderClient } from '/Users/tiw/Documents/OpenSource/react-adminTs/node_modules/_@umijs_renderer-react@3.2.19@@umijs/renderer-react/dist/index.js';
+import { getRoutes } from './core/routes';
 
 
 require('../global.less');
-require('./plugin-locale/locale')._onCreate();
-(() => {
-  // Runtime block add component
-  window.GUmiUIFlag = require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_plugin-ui-blocks@2.2.2@@umijs/plugin-ui-blocks/lib/sdk/flagBabelPlugin/GUmiUIFlag.js').default;
+import { _onCreate } from './plugin-locale/locale';
+_onCreate();
 
-  // Enable/Disable block add edit mode
-  window.addEventListener(
-    'message',
-    event => {
-      try {
-        const { action, data } = JSON.parse(event.data);
-        switch (action) {
-          case 'umi.ui.checkValidEditSection':
-            const haveValid = !!document.querySelectorAll('div.g_umiuiBlockAddEditMode').length;
-            const frame = document.getElementById('umi-ui-bubble');
-            if (frame && frame.contentWindow) {
-              frame.contentWindow.postMessage(
-                JSON.stringify({
-                  action: 'umi.ui.checkValidEditSection.success',
-                  payload: {
-                    haveValid,
-                  },
-                }),
-                '*',
-              );
-            }
-          default:
-            break;
-        }
-      } catch (e) {}
-    },
-    false,
-  );
-})();
-
-
-const getClientRender = (args: { hot?: boolean } = {}) => plugin.applyPlugins({
+const getClientRender = (args: { hot?: boolean; routes?: any[] } = {}) => plugin.applyPlugins({
   key: 'render',
   type: ApplyPluginsType.compose,
   initialValue: () => {
-    return renderClient({
-      // @ts-ignore
-      routes: require('./core/routes').routes,
-      plugin,
-      history: createHistory(args.hot),
-      isServer: process.env.__IS_SERVER,
-      dynamicImport: true,
-      rootElement: 'root',
+    const opts = plugin.applyPlugins({
+      key: 'modifyClientRenderOpts',
+      type: ApplyPluginsType.modify,
+      initialValue: {
+        routes: args.routes || getRoutes(),
+        plugin,
+        history: createHistory(args.hot),
+        isServer: process.env.__IS_SERVER,
+        dynamicImport: true,
+        rootElement: 'root',
+      },
     });
+    return renderClient(opts);
   },
   args,
 });
@@ -67,27 +39,8 @@ export default clientRender();
 
 
     window.g_umi = {
-      version: '3.2.10',
+      version: '3.2.19',
     };
-  
-
-    (() => {
-      try {
-        const ua = window.navigator.userAgent;
-        const isIE = ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1;
-        if (isIE) return;
-
-        // Umi UI Bubble
-        require('/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/node_modules/_@umijs_preset-ui@2.2.2@@umijs/preset-ui/lib/bubble').default({
-          port: 3000,
-          path: '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin',
-          currentProject: '',
-          isBigfish: undefined,
-        });
-      } catch (e) {
-        console.warn('Umi UI render error:', e);
-      }
-    })();
   
 
 // hot module replacement
@@ -95,6 +48,13 @@ export default clientRender();
 if (module.hot) {
   // @ts-ignore
   module.hot.accept('./core/routes', () => {
-    getClientRender({ hot: true })();
+    const ret = require('./core/routes');
+    if (ret.then) {
+      ret.then(({ getRoutes }) => {
+        getClientRender({ hot: true, routes: getRoutes() })();
+      });
+    } else {
+      getClientRender({ hot: true, routes: ret.getRoutes() })();
+    }
   });
 }

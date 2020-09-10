@@ -6,10 +6,10 @@ import { EffectsCommandMap, SubscriptionAPI } from 'dva';
 import { match } from 'react-router-dom';
 import { Location, LocationState, History } from 'history';
 
-export * from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/global';
-export * from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/login';
-export * from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/setting';
-export * from '/Users/tiw/Documents/work/JIAi/code/bank/interests_exchange_admin/src/models/user';
+export * from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/global';
+export * from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/login';
+export * from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/setting';
+export * from '/Users/tiw/Documents/OpenSource/react-adminTs/src/models/user';
 
 export interface Action<T = any> {
   type: T
